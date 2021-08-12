@@ -26,6 +26,7 @@ public final class FlutterCompassPlugin implements StreamHandler {
     private final Sensor sensor;
     private final float[] orientation;
     private final float[] rMat;
+    private boolean badSensor = false;
 
     // Alternative sensors
     private final Sensor gsensor;
@@ -138,6 +139,9 @@ public final class FlutterCompassPlugin implements StreamHandler {
                         } else {
                             v[2] = -1; // unknown
                         }
+                        if(badSensor){
+                            v[1] = -1;
+                        }
                         events.success(v);
                     }
                 }
@@ -158,6 +162,7 @@ public final class FlutterCompassPlugin implements StreamHandler {
             defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         }
         if (defaultSensor == null) { //Alternative sensor
+            badSensor = true;
             defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
         }
         if (defaultSensor == null) { // Alternative way
