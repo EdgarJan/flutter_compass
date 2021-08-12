@@ -34,6 +34,7 @@ public final class FlutterCompassPlugin implements StreamHandler {
     private float[] mGeomagnetic = new float[3];
     private float[] R = new float[9];
     private float[] I = new float[9];
+    private float test = 0;
 
     public static void registerWith(Registrar registrar) {
         EventChannel channel = new EventChannel(registrar.messenger(), "hemanthraj/flutter_compass");
@@ -126,7 +127,7 @@ public final class FlutterCompassPlugin implements StreamHandler {
 
                         double[] v = new double[3];
                         v[0] = newAzimuth;
-                        v[1] = azimuthForCameraMode;
+                        v[1] = test;
                         // Include reasonable compass accuracy numbers. These are not representative
                         // of the real error.
                         if (lastAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_HIGH) {
@@ -155,12 +156,15 @@ public final class FlutterCompassPlugin implements StreamHandler {
         Sensor defaultSensor = null;
         Sensor defaultSensor2 = null;
         if (defaultSensor == null) { //Alternative sensor
+            test = 1;
             defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         }
         if (defaultSensor == null) { //Alternative sensor
+            test = 2;
             defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
         }
         if (defaultSensor == null) { // Alternative way
+            test = 3;
             defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
             defaultSensor2 = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         }
