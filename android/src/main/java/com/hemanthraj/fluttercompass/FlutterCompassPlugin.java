@@ -159,10 +159,10 @@ public final class FlutterCompassPlugin implements StreamHandler {
             test = 1;
             defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         }
-//        if (defaultSensor == null) { //Alternative sensor
-//            test = 2;
-//            defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
-//        }
+        if (defaultSensor == null) { //Alternative sensor
+            test = 2;
+            defaultSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+        }
         if (defaultSensor == null) { // Alternative way
             test = 3;
             defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
